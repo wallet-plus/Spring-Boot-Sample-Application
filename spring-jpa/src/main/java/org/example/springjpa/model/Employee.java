@@ -1,26 +1,22 @@
-package com.example.springjpa.model;
+package org.example.springjpa.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class Employee {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String department;
+    private String username;
+    private String password;
+    private String email;
+    private String role;
 
-    // Getters and setters
-
-    public Employee() {}
-
-    public Employee(Long id, String name, String department) {
-        this.id = id;
-        this.name = name;
-        this.department = department;
-    }
-
+    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -29,19 +25,35 @@ public class Employee {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getDepartment() {
-        return department;
+    public String getPassword() {
+        return password;
     }
 
-    public void setDepartment(String department) {
-        this.department = department;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }
