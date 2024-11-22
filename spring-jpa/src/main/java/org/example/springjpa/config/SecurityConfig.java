@@ -45,6 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable() // Disable CSRF for simplicity; enable in production
                 .authorizeRequests()
                 .antMatchers("/api/employees/**").hasAnyRole("USER", "ADMIN") // Allow both USER and ADMIN roles
+                .antMatchers("/api/rooms/all", "/api/rooms/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic(); // Enable Basic Authentication
