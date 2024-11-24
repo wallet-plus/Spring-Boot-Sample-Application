@@ -1,7 +1,7 @@
 package org.example.springjpa.service;
 
-import org.example.springjpa.model.Employee;
-import org.example.springjpa.repository.EmployeeRepository;
+import org.example.springjpa.model.User;
+import org.example.springjpa.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,20 +9,20 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class EmployeeService {
+public class UserService {
 
     @Autowired
-    private EmployeeRepository employeeRepository;
+    private UserRepository employeeRepository;
 
-    public List<Employee> getAllEmployees() {
+    public List<User> getAllEmployees() {
         return employeeRepository.findAll();
     }
 
-    public Optional<Employee> getEmployeeById(Long id) {
+    public Optional<User> getEmployeeById(Long id) {
         return employeeRepository.findById(id);
     }
 
-    public Employee saveEmployee(Employee employee) {
+    public User saveEmployee(User employee) {
         return employeeRepository.save(employee);
     }
 

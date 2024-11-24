@@ -20,16 +20,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected UserDetailsService userDetailsService() {
         InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager();
         manager.createUser(
-                User.withUsername("user")
-                        .password(passwordEncoder().encode("password"))
-                        .roles("USER")
-                        .build()
-        );
-        manager.createUser(
                 User.withUsername("admin")
                         .password(passwordEncoder().encode("admin"))
                         .roles("ADMIN")
                         .build()
+        );
+        manager.createUser(
+            User.withUsername("staff")
+                    .password(passwordEncoder().encode("staff"))
+                    .roles("STAFF")
+                    .build()
+        );
+        manager.createUser(
+            User.withUsername("patient")
+                    .password(passwordEncoder().encode("patient"))
+                    .roles("PATIENT")
+                    .build()
         );
         return manager;
     }
@@ -44,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable() // Disable CSRF for simplicity; enable in production
                 .authorizeRequests()
-                .antMatchers("/api/employees/**").hasAnyRole("USER", "ADMIN") // Allow both USER and ADMIN roles
+                .antMatchers("/api/users/**").hasAnyRole("STAFF", "ADMIN","PATIENT") // Allow both USER and ADMIN roles
                 .antMatchers("/api/rooms/all", "/api/rooms/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
