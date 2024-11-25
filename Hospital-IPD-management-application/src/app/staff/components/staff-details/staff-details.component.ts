@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { StaffService } from 'src/app/services/staff.service';
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router'; 
 
 @Component({
   selector: 'app-staff-details',
@@ -15,7 +17,8 @@ export class StaffDetailsComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private route: ActivatedRoute, 
-    private staffService: StaffService) {}
+    private staffService: StaffService,
+    private router: Router) {}
 
   ngOnInit(): void {
     this.initForm();
@@ -55,35 +58,65 @@ export class StaffDetailsComponent implements OnInit {
     });
   }
 
-  // Save or Update staff details
   saveOrUpdateStaff() {
     if (this.staffForm.invalid) {
       this.staffForm.markAllAsTouched();
       return;
     }
-
+  
     const staffData: any = this.staffForm.value;
-
+  
     if (this.isEditMode && this.selectedStaffId) {
       // Update staff
       this.staffService.updateStaff(this.selectedStaffId, staffData).subscribe({
         next: () => {
-          alert('Staff updated successfully');
-          this.resetForm();
+          Swal.fire({
+            title: 'Updated!',
+            text: 'Staff updated successfully.',
+            icon: 'success',
+            confirmButtonText: 'OK'
+          }).then(() => {
+            // Navigate back to staff list after successful update
+            this.router.navigate(['/staff/list']);
+          });
         },
-        error: (err) => console.error('Error updating staff', err),
+        error: (err) => {
+          Swal.fire({
+            title: 'Error!',
+            text: 'There was an issue updating the staff.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+          });
+          console.error('Error updating staff', err);
+        },
       });
     } else {
       // Create new staff
       this.staffService.addStaff(staffData).subscribe({
         next: () => {
-          alert('Staff created successfully');
-          this.resetForm();
+          Swal.fire({
+            title: 'Created!',
+            text: 'Staff created successfully.',
+            icon: 'success',
+            confirmButtonText: 'OK'
+          }).then(() => {
+            // Navigate back to staff list after successful creation
+            this.router.navigate(['/staff/list']);
+          });
         },
-        error: (err) => console.error('Error creating staff', err),
+        error: (err) => {
+          Swal.fire({
+            title: 'Error!',
+            text: 'There was an issue creating the staff.',
+            icon: 'error',
+            confirmButtonText: 'OK'
+          });
+          console.error('Error creating staff', err);
+        },
       });
     }
   }
+  
 
   // Reset form to initial state
   resetForm() {
