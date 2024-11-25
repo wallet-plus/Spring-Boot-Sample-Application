@@ -18,21 +18,21 @@ export class StaffService {
 
   // Get details of a single staff member by ID
   getStaffById(id: number): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/${id}`);
+    return this.http.get<any>(`${this.baseUrl}users/${id}`);
   }
 
   // Add a new staff member
   addStaff(staffData: any): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}`, staffData);
+    return this.http.post<any>(`${this.baseUrl}users`, staffData);
   }
 
   // Update an existing staff member by ID
   updateStaff(id: number, staffData: any): Observable<any> {
-    return this.http.put<any>(`${this.baseUrl}/${id}`, staffData);
+    return this.http.put<any>(`${this.baseUrl}users/${id}`, staffData);
   }
 
   // Delete a staff member by ID
   deleteStaff(id: number): Observable<any> {
-    return this.http.delete<any>(`${this.baseUrl}/${id}`);
+    return this.http.delete<any>(`${this.baseUrl}users/${id}`);
   }
 }

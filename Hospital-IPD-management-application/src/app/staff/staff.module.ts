@@ -4,6 +4,7 @@ import { StaffComponent } from './staff.component';
 import { RouterModule, Routes } from '@angular/router';
 import { StaffListComponent } from './components/staff-list/staff-list.component';
 import { StaffDetailsComponent } from './components/staff-details/staff-details.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 const routes: Routes = [
@@ -21,7 +22,11 @@ const routes: Routes = [
         component : StaffListComponent
       },
       {
-        path : '',
+        path : 'details',
+        component : StaffDetailsComponent
+      },
+      {
+        path : 'details/:id',
         component : StaffDetailsComponent
       }
 
@@ -37,7 +42,9 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    FormsModule,
+    ReactiveFormsModule
 
   ]
 })
