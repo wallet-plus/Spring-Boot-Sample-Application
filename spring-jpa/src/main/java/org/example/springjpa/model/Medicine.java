@@ -47,4 +47,6 @@ public class Medicine {
     public void setPrice(Double price) {
         this.price = price;
     }
+
+
 }
