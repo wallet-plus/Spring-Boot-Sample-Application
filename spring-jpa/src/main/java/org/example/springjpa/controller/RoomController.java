@@ -1,6 +1,7 @@
 package org.example.springjpa.controller;
 
 import org.example.springjpa.model.Room;
+import org.example.springjpa.model.RoomPatientAssociation;
 import org.example.springjpa.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -50,5 +51,12 @@ public class RoomController {
     // @PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
     public ResponseEntity<Room> getRoomById(@PathVariable Long id) {
         return ResponseEntity.ok(roomService.getRoomById(id));
+    }
+
+
+    // New method to move patient to a new room
+    @PutMapping("/{roomId}/move/{patientId}")
+    public RoomPatientAssociation movePatientToNewRoom(@PathVariable Long roomId, @PathVariable Long patientId) {
+        return roomService.movePatientToNewRoom(roomId, patientId);
     }
 }
