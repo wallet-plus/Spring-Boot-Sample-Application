@@ -45,7 +45,6 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     FormsModule,
     ReactiveFormsModule
-
   ]
 })
 export class StaffModule { }

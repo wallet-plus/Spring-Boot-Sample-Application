@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RoomService } from 'src/app/services/room.service';
 import { StaffService } from 'src/app/services/staff.service';
 import Swal from 'sweetalert2';
 
@@ -8,18 +9,18 @@ import Swal from 'sweetalert2';
   styleUrls: ['./room-list.component.scss']
 })
 export class RoomListComponent {
-  staffList: any[] = []; 
+  roomList: any[] = []; 
 
-  constructor(private staffService: StaffService) {}
+  constructor(private roomService: RoomService) {}
 
   ngOnInit(): void {
     this.getStaff();
   }
 
   getStaff(): void {
-    this.staffService.getStaffList().subscribe(
+    this.roomService.getRoomList().subscribe(
       (data) => {
-        this.staffList = data; // Assign the employee data
+        this.roomList = data; // Assign the employee data
       },
       (error) => {
         console.error('Error fetching employee list:', error);
@@ -33,7 +34,7 @@ export class RoomListComponent {
     // Navigate to edit page or open a modal for editing
   }
   
-  deleteStaff(staff: any) {
+  delete(staff: any) {
     Swal.fire({
       title: 'Are you sure?',
       text: `You are about to delete ${staff.firstName} ${staff.lastName}. This action cannot be undone.`,
@@ -45,7 +46,7 @@ export class RoomListComponent {
     }).then((result) => {
       if (result.isConfirmed) {
         // Proceed with deletion if confirmed
-        this.staffService.deleteStaff(staff.id).subscribe({
+        this.roomService.deleteRoom(staff.id).subscribe({
           next: () => {
             Swal.fire('Deleted!', `${staff.firstName} ${staff.lastName} has been deleted.`, 'success');
             // Optionally refresh the list or remove the staff from the UI

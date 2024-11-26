@@ -4,7 +4,7 @@
     <div class="card">
   
       <div class="card-header d-flex justify-content-between align-items-center">
-        <h5 class="mb-0">Staff</h5>
+        <h5 class="mb-0">Rooms</h5>
         <small class="text-muted float-end">
           <a [routerLink]="['/rooms/details']"> <!---->
             <button type="button" class="btn btn-primary">Add</button>
@@ -17,32 +17,27 @@
           <thead class="table-light">
             <tr>
               <th>Name</th>
-              <th>User Name</th>
-              <th>Email</th>
-              <th>Role</th>
-              <th>Mobile</th>
+              <th>Charges</th>
+              <th>Description</th>
               <th></th>
             </tr>
           </thead>
           <tbody class="table-border-bottom-0">
-            <tr *ngFor="let staff of staffList">
-              <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{staff.firstName}}
-                  {{staff.lastName}}</strong></td>
-              <th>{{staff.username}}</th>
-              <td>{{staff.email}}</td>
-              <td>{{staff.role}}</td>
-              <td>{{staff.mobile}}</td>
+            <tr *ngFor="let room of roomList">
+              <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{room.name}}
+                 </strong></td>
+              <th> {{room.charges}}</th>
+              <td>{{room.description}}</td>
               <td>
                 <div class="dropdown">
                   <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                     <i class="bx bx-dots-vertical-rounded"></i>
                   </button>
                   <div class="dropdown-menu">
-                    <!-- [routerLink]="['/staff/details', staff.id]" -->
-                    <a class="dropdown-item" 
+                    <a class="dropdown-item" [routerLink]="['/rooms/details', room.id]"
                       ><i class="bx bx-edit-alt me-2"></i> Edit</a
                     >
-                    <a class="dropdown-item" (click)="deleteStaff(staff)"
+                    <a class="dropdown-item" (click)="delete(room)"
                       ><i class="bx bx-trash me-2"></i> Delete</a
                     >
                   </div>
