@@ -59,6 +59,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/api/users/**").permitAll() // Allow unrestricted access to these endpoints
                 .antMatchers("/api/rooms/all", "/api/rooms/**").permitAll()
+                .antMatchers("/api/patients", "/api/patients/**").permitAll()
+
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic(); // Enable Basic Authentication
