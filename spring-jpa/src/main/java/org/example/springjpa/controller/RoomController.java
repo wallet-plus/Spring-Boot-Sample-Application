@@ -16,33 +16,38 @@ public class RoomController {
     @Autowired
     private RoomService roomService;
 
-    @PostMapping("/add")
-//    @PreAuthorize("hasRole('ADMIN')")
+    // Create a room (POST /api/rooms)
+    @PostMapping
+    // @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Room> addRoom(@RequestBody Room room) {
         return ResponseEntity.ok(roomService.addRoom(room));
     }
 
-    @PutMapping("/update/{id}")
-//    @PreAuthorize("hasRole('ADMIN')")
+    // Update a room (PUT /api/rooms/{id})
+    @PutMapping("/{id}")
+    // @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Room> updateRoom(@PathVariable Long id, @RequestBody Room room) {
         return ResponseEntity.ok(roomService.updateRoom(id, room));
     }
 
-    @DeleteMapping("/delete/{id}")
-//    @PreAuthorize("hasRole('ADMIN')")
+    // Delete a room (DELETE /api/rooms/{id})
+    @DeleteMapping("/{id}")
+    // @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<String> deleteRoom(@PathVariable Long id) {
         roomService.deleteRoom(id);
         return ResponseEntity.ok("Room deleted successfully");
     }
 
-    @GetMapping("/all")
-//    @PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
+    // Get all rooms (GET /api/rooms)
+    @GetMapping
+    // @PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
     public ResponseEntity<List<Room>> getAllRooms() {
         return ResponseEntity.ok(roomService.getAllRooms());
     }
 
+    // Get a room by ID (GET /api/rooms/{id})
     @GetMapping("/{id}")
-//    @PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
+    // @PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
     public ResponseEntity<Room> getRoomById(@PathVariable Long id) {
         return ResponseEntity.ok(roomService.getRoomById(id));
     }
