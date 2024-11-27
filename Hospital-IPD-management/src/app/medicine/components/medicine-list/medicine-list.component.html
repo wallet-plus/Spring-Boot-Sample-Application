@@ -11,33 +11,23 @@
           </a>
         </small>
       </div>
-  
-      <!-- <pre>
-        {{patientList | json}}
-      </pre> -->
 
       <div class="table-responsive text-nowrap">
         <table class="table">
           <thead class="table-light">
             <tr>
               <th>Name</th>
-              <th>gender</th>
-              <th>age</th>
-              <th>contact Number</th>
-              <th>email</th>
-              <th>address</th>
+              <th>price</th>
+              <th>description</th>
               <th></th>
             </tr>
           </thead>
           <tbody class="table-border-bottom-0">
-            <tr *ngFor="let room of patientList">
-              <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{room.firstName}} {{room.lastName}}
+            <tr *ngFor="let room of medicineList">
+              <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{room.name}}
                  </strong></td>
-              <th> {{room.gender}}</th>
-              <td>{{room.age}}</td>
-              <td>{{room.contactNumber}}</td>
-              <td>{{room.email}}</td>
-              <td>{{room.address}}</td>
+              <th> {{room.price}}</th>
+              <td>{{room.description}}</td>
               
               <td>
                 <div class="dropdown">

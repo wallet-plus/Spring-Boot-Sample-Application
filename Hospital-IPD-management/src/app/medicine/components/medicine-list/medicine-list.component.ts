@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MedicineService } from 'src/app/services/medicine.service';
 import { PatientService } from 'src/app/services/patient.service';
 import Swal from 'sweetalert2';
 
@@ -8,18 +9,18 @@ import Swal from 'sweetalert2';
   styleUrls: ['./medicine-list.component.scss']
 })
 export class MedicineListComponent {
-  patientList: any[] = []; 
+  medicineList: any[] = []; 
 
-  constructor(private patientService: PatientService) {}
+  constructor(private medicineService: MedicineService) {}
 
   ngOnInit(): void {
     this.getStaff();
   }
 
   getStaff(): void {
-    this.patientService.getPatientsList().subscribe(
+    this.medicineService.getMedicineList().subscribe(
       (data) => {
-        this.patientList = data; // Assign the employee data
+        this.medicineList = data; // Assign the employee data
       },
       (error) => {
         console.error('Error fetching employee list:', error);
@@ -45,7 +46,7 @@ export class MedicineListComponent {
     }).then((result) => {
       if (result.isConfirmed) {
         // Proceed with deletion if confirmed
-        this.patientService.deletePatients(staff.id).subscribe({
+        this.medicineService.deleteMedicine(staff.id).subscribe({
           next: () => {
             Swal.fire('Deleted!', `${staff.firstName} ${staff.lastName} has been deleted.`, 'success');
             // Optionally refresh the list or remove the staff from the UI
