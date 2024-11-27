@@ -1,7 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { FormBuilder } from '@angular/forms';
 import { MedicineService } from 'src/app/services/medicine.service';
+import Swal from 'sweetalert2'; 
 
 @Component({
   selector: 'app-medicine-dialog',
@@ -15,7 +16,8 @@ export class MedicineDialogComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder,
-    private medicineService: MedicineService // Inject the MedicineService
+    private medicineService: MedicineService,
+    private dialogRef: MatDialogRef<MedicineDialogComponent>
   ) {}
 
   ngOnInit(): void {
@@ -45,15 +47,33 @@ export class MedicineDialogComponent implements OnInit {
     }));
 
     // Call the service method to assign medicines
-    this.medicineService.assignMedicines(medicinesToAssign).subscribe(
+    this.medicineService.assignMedicines(medicinesToAssign[0]).subscribe(
       (response) => {
-        console.log('Medicine assignment successful', response);
+        
+        // Success: Show success notification
+        Swal.fire({
+          title: 'Success!',
+          text: 'Medicine assignment successful',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        }).then(() => {
+          // Close the dialog after the success message
+          this.dialogRef.close();
+        });
       },
       (error) => {
-        console.error('Error assigning medicine:', error);
+
+        // Error: Show error notification and do not close the dialog
+        Swal.fire({
+          title: 'Error!',
+          text: 'An error occurred while assigning medicines. Please try again.',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
       }
     );
   }
+
 
   // Add a new medicine entry
   addMedicine(): void {
@@ -67,7 +87,7 @@ export class MedicineDialogComponent implements OnInit {
 
   // Cancel the form and close the dialog
   cancel(): void {
-    console.log('Form cancelled');
+    this.dialogRef.close();
     // Close the dialog or reset the form as needed
   }
 }

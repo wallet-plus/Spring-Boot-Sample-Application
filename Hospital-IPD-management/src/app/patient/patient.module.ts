@@ -6,6 +6,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material.module';
 import { MedicineDialogComponent } from './dialogs/medicine-dialog/medicine-dialog.component';
+import { PatientMedicinesComponent } from './components/patient-medicines/patient-medicines.component';
+import { PatientComponent } from './components/patient/patient.component';
 
 const routes: Routes = [
   {
@@ -23,11 +25,11 @@ const routes: Routes = [
       },
       {
         path : 'details',
-        component : PatientDetailsComponent
+        component : PatientComponent
       },
       {
         path : 'details/:id',
-        component : PatientDetailsComponent
+        component : PatientComponent
       }
 
     ]
@@ -39,7 +41,9 @@ const routes: Routes = [
   declarations: [
     PatientListComponent,
     PatientDetailsComponent,
-    MedicineDialogComponent
+    MedicineDialogComponent,
+    PatientMedicinesComponent,
+    PatientComponent
   ],
   imports: [
     CommonModule,

@@ -40,4 +40,9 @@ export class MedicineService {
   assignMedicines(medicineData: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}medicines/assign`, medicineData);
   }
+
+  // Method to assign medicines to a patient
+  getPatientMedicines(id: any): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}medicines/patient/${id}`);
+  }
 }
