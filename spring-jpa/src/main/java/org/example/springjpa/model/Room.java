@@ -14,6 +14,7 @@ public class Room {
     private String name;
     private Double charges;
     private String description;
+    private String status; // New field for room status
 
     // Getters and Setters
     public Long getId() {
@@ -46,5 +47,13 @@ public class Room {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

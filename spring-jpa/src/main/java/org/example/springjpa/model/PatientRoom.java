@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-public class RoomPatientAssociation {
+public class PatientRoom {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
