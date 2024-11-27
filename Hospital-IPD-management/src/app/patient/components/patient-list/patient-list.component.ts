@@ -61,11 +61,11 @@ export class PatientListComponent {
     });
   }
 
-  assignMedicine() {
+  assignMedicine( patient: any) {
     const dialogRef = this.dialog.open(MedicineDialogComponent, {
       width: '70%',    // Set the width to 70% of the screen width
       height: '70%',   // Set the height to 80% of the screen height
-      data: { name: 'John Doe' }  // Optional data you want to pass to dialog
+      data: { patient: patient }  // Optional data you want to pass to dialog
     });
   
     dialogRef.afterClosed().subscribe(result => {

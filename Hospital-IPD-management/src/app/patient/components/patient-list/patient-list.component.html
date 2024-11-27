@@ -30,14 +30,14 @@
             </tr>
           </thead>
           <tbody class="table-border-bottom-0">
-            <tr *ngFor="let room of patientList">
-              <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{room.firstName}} {{room.lastName}}
+            <tr *ngFor="let patient of patientList">
+              <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>{{patient.firstName}} {{patient.lastName}}
                  </strong></td>
-              <th> {{room.gender}}</th>
-              <td>{{room.age}}</td>
-              <td>{{room.contactNumber}}</td>
-              <td>{{room.email}}</td>
-              <!-- <td>{{room.address}}</td> -->
+              <th> {{patient.gender}}</th>
+              <td>{{patient.age}}</td>
+              <td>{{patient.contactNumber}}</td>
+              <td>{{patient.email}}</td>
+              <!-- <td>{{patient.address}}</td> -->
               
               <td>
                 <div class="dropdown">
@@ -46,16 +46,16 @@
                   </button>
                   <div class="dropdown-menu">
 
-                    <a class="dropdown-item" (click)="assignMedicine()"
+                    <a class="dropdown-item" (click)="assignMedicine(patient)"
                       ><i class="bx bx-edit-alt me-2"></i> Assign Medicine</a
                     >
 
-                    <a class="dropdown-item" [routerLink]="['/patient/details', room.id]"
+                    <a class="dropdown-item" [routerLink]="['/patient/details', patient.id]"
                       ><i class="bx bx-edit-alt me-2"></i> Edit</a
                     >
 
                     
-                    <a class="dropdown-item" (click)="delete(room)"
+                    <a class="dropdown-item" (click)="delete(patient)"
                       ><i class="bx bx-trash me-2"></i> Delete</a
                     >
                   </div>

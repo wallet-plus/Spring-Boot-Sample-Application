@@ -35,4 +35,9 @@ export class MedicineService {
   deleteMedicine(id: number): Observable<any> {
     return this.http.delete<any>(`${this.baseUrl}medicines/${id}`); // Updated endpoint for deleting a room
   }
+
+  // Method to assign medicines to a patient
+  assignMedicines(medicineData: any): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}medicines/assign`, medicineData);
+  }
 }

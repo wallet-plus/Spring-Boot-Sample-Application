@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { PatientListComponent } from './components/patient-list/patient-list.component';
 import { PatientDetailsComponent } from './components/patient-details/patient-details.component';
 import { RouterModule, Routes } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material.module';
 import { MedicineDialogComponent } from './dialogs/medicine-dialog/medicine-dialog.component';
 
@@ -45,6 +45,7 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     ReactiveFormsModule,
+    FormsModule,
     MaterialModule
   ]
 })
