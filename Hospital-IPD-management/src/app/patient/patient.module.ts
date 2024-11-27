@@ -4,6 +4,8 @@ import { PatientListComponent } from './components/patient-list/patient-list.com
 import { PatientDetailsComponent } from './components/patient-details/patient-details.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from '../material.module';
+import { MedicineDialogComponent } from './dialogs/medicine-dialog/medicine-dialog.component';
 
 const routes: Routes = [
   {
@@ -36,12 +38,14 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     PatientListComponent,
-    PatientDetailsComponent
+    PatientDetailsComponent,
+    MedicineDialogComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MaterialModule
   ]
 })
 export class PatientModule { }

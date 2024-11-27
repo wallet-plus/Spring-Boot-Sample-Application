@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { PatientService } from 'src/app/services/patient.service';
 import Swal from 'sweetalert2';
+import { MedicineDialogComponent } from '../../dialogs/medicine-dialog/medicine-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-patient-list',
@@ -10,7 +12,7 @@ import Swal from 'sweetalert2';
 export class PatientListComponent {
   patientList: any[] = []; 
 
-  constructor(private patientService: PatientService) {}
+  constructor(private patientService: PatientService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.getStaff();
@@ -58,4 +60,20 @@ export class PatientListComponent {
       }
     });
   }
+
+  assignMedicine() {
+    const dialogRef = this.dialog.open(MedicineDialogComponent, {
+      width: '70%',    // Set the width to 70% of the screen width
+      height: '70%',   // Set the height to 80% of the screen height
+      data: { name: 'John Doe' }  // Optional data you want to pass to dialog
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('Dialog closed with result: ', result);
+      // You can process the result from the dialog here if needed
+    });
+  }
+  
+  
+  
 }

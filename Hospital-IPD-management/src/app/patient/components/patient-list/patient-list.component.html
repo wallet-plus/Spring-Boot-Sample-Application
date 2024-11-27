@@ -25,7 +25,7 @@
               <th>age</th>
               <th>contact Number</th>
               <th>email</th>
-              <th>address</th>
+              <!-- <th>address</th> -->
               <th></th>
             </tr>
           </thead>
@@ -37,7 +37,7 @@
               <td>{{room.age}}</td>
               <td>{{room.contactNumber}}</td>
               <td>{{room.email}}</td>
-              <td>{{room.address}}</td>
+              <!-- <td>{{room.address}}</td> -->
               
               <td>
                 <div class="dropdown">
@@ -45,9 +45,16 @@
                     <i class="bx bx-dots-vertical-rounded"></i>
                   </button>
                   <div class="dropdown-menu">
+
+                    <a class="dropdown-item" (click)="assignMedicine()"
+                      ><i class="bx bx-edit-alt me-2"></i> Assign Medicine</a
+                    >
+
                     <a class="dropdown-item" [routerLink]="['/patient/details', room.id]"
                       ><i class="bx bx-edit-alt me-2"></i> Edit</a
                     >
+
+                    
                     <a class="dropdown-item" (click)="delete(room)"
                       ><i class="bx bx-trash me-2"></i> Delete</a
                     >
