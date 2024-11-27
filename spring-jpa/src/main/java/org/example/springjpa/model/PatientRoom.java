@@ -12,14 +12,17 @@ public class PatientRoom {
 
     @ManyToOne
     @JoinColumn(name = "room_id", nullable = false)
-    private Room room;
+    private Room room; // This implicitly handles the roomId
 
     @ManyToOne
     @JoinColumn(name = "patient_id", nullable = false)
     private Patient patient;
 
-    @Column(name = "move_date")
-    private LocalDate moveDate;
+    @Column(name = "start_date", nullable = false)
+    private LocalDate startDate;
+
+    @Column(name = "end_date")
+    private LocalDate endDate;
 
     // Getters and Setters
     public Long getId() {
@@ -46,11 +49,19 @@ public class PatientRoom {
         this.patient = patient;
     }
 
-    public LocalDate getMoveDate() {
-        return moveDate;
+    public LocalDate getStartDate() {
+        return startDate;
     }
 
-    public void setMoveDate(LocalDate moveDate) {
-        this.moveDate = moveDate;
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
     }
 }

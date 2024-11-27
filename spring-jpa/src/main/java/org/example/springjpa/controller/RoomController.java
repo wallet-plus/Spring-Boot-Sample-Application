@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -54,9 +55,10 @@ public class RoomController {
     }
 
 
-    // New method to move patient to a new room
+    // Update the method to include the current date as startDate
     @PutMapping("/{roomId}/move/{patientId}")
     public PatientRoom movePatientToNewRoom(@PathVariable Long roomId, @PathVariable Long patientId) {
-        return roomService.movePatientToNewRoom(roomId, patientId);
+        // Pass the current date (startDate)
+        return roomService.movePatientToNewRoom(roomId, patientId, LocalDate.now());
     }
 }

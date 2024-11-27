@@ -1,9 +1,7 @@
 package org.example.springjpa.service;
 
-import org.example.springjpa.model.Patient;
-import org.example.springjpa.model.Room;
 import org.example.springjpa.model.PatientRoom;
-import org.example.springjpa.repository.PatientRepository;
+import org.example.springjpa.model.Room;
 import org.example.springjpa.repository.PatientRoomRepository;
 import org.example.springjpa.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class RoomService {
@@ -20,10 +17,7 @@ public class RoomService {
     private RoomRepository roomRepository;
 
     @Autowired
-    private PatientRepository patientRepository;
-
-    @Autowired
-    private PatientRoomRepository PatientRoomRepository;
+    private PatientRoomRepository patientRoomRepository;
 
     public Room addRoom(Room room) {
         return roomRepository.save(room);
@@ -49,34 +43,19 @@ public class RoomService {
         return roomRepository.findById(id).orElseThrow(() -> new RuntimeException("Room not found"));
     }
 
-    // Method to assign a new room to a patient and track the move date
-    public PatientRoom movePatientToNewRoom(Long roomId, Long patientId) {
-        Optional<Room> roomOpt = roomRepository.findById(roomId);
-        Optional<Patient> patientOpt = patientRepository.findById(patientId);
+    public PatientRoom movePatientToNewRoom(Long roomId, Long patientId, LocalDate startDate) {
+        // Find the patient room with no start date (i.e., not yet moved)
+        PatientRoom patientRoom = patientRoomRepository.findByPatientIdAndStartDateIsNull(patientId)
+                .orElseThrow(() -> new RuntimeException("Patient not found or already moved"));
 
-        if (roomOpt.isPresent() && patientOpt.isPresent()) {
-            Room room = roomOpt.get();
-            Patient patient = patientOpt.get();
+        // Update the room and start date
+        Room room = roomRepository.findById(roomId)
+                .orElseThrow(() -> new RuntimeException("Room not found"));
 
-            // Check if the patient is already in a room
-            Optional<PatientRoom> existingAssociation = PatientRoomRepository
-                    .findByPatientIdAndMoveDateIsNull(patientId); // Assume moveDate is null for current room
+        patientRoom.setStartDate(startDate);
+        patientRoom.setRoom(room);  // Set the Room object, not the roomId
 
-            if (existingAssociation.isPresent()) {
-                // If patient is already assigned to a room, mark that association as completed (with move date)
-                PatientRoom association = existingAssociation.get();
-                association.setMoveDate(LocalDate.now()); // Set the move date for the old room
-                PatientRoomRepository.save(association); // Save the updated association
-            }
-
-            // Now create a new room-patient association for the new room
-            PatientRoom newAssociation = new PatientRoom();
-            newAssociation.setRoom(room);
-            newAssociation.setPatient(patient);
-            newAssociation.setMoveDate(LocalDate.now()); // Set the current date as move date for the new room
-            return PatientRoomRepository.save(newAssociation);
-        } else {
-            throw new RuntimeException("Room or Patient not found");
-        }
+        // Save the updated patient room
+        return patientRoomRepository.save(patientRoom);
     }
 }
