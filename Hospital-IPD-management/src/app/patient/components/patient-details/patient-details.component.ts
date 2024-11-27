@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RoomService } from 'src/app/services/room.service';
+import { PatientService } from 'src/app/services/patient.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -10,111 +10,114 @@ import Swal from 'sweetalert2';
   styleUrls: ['./patient-details.component.scss']
 })
 export class PatientDetailsComponent {
-  roomForm!: FormGroup;
+  patientForm!: FormGroup;
   isEditMode = false;
-  selectedRoomId: number | null = null;
+  selectedPatientId: number | null = null;
 
-  constructor(private fb: FormBuilder,
-    private route: ActivatedRoute, 
-    private roomService: RoomService,
-    private router: Router) {}
+  constructor(
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private patientService: PatientService, // Replace with your service
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.initForm();
 
-    // Check if an 'id' exists in the route parameters
-    const roomId = this.route.snapshot.paramMap.get('id');
-    if (roomId) {
-      this.selectedRoomId = +roomId; // convert to number
+    const patientId = this.route.snapshot.paramMap.get('id');
+    if (patientId) {
+      this.selectedPatientId = +patientId;
       this.isEditMode = true;
-      this.loadRoomDetails();
-    }
-  }
-
-  // Load room details for editing
-  loadRoomDetails() {
-    if (this.selectedRoomId) {
-      this.roomService.getRoomById(this.selectedRoomId).subscribe({
-        next: (roomData) => {
-          this.roomForm.patchValue(roomData); // Populate form with room data
-        },
-        error: (err) => console.error('Error loading room details', err),
-      });
+      this.loadPatientDetails();
     }
   }
 
   // Initialize the form
   initForm() {
-    this.roomForm = this.fb.group({
-      name: ['', Validators.required],
-      charges: [0, [Validators.required, Validators.min(0)]],
-      description: ['', Validators.required]
+    this.patientForm = this.fb.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      gender: ['', Validators.required],
+      age: [0, [Validators.required, Validators.min(0)]],
+      contactNumber: ['', [Validators.required, Validators.pattern(/^\d{10}$/)]],
+      address: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]]
     });
   }
 
-  saveOrUpdateRoom() {
-    if (this.roomForm.invalid) {
-      this.roomForm.markAllAsTouched();
+  // Load patient details for editing
+  loadPatientDetails() {
+    if (this.selectedPatientId) {
+      this.patientService.getPatientsById(this.selectedPatientId).subscribe({
+        next: (patientData) => {
+          this.patientForm.patchValue(patientData);
+        },
+        error: (err) => console.error('Error loading patient details', err),
+      });
+    }
+  }
+
+  saveOrUpdatePatient() {
+    if (this.patientForm.invalid) {
+      this.patientForm.markAllAsTouched();
       return;
     }
-  
-    const roomData: any = this.roomForm.value;
-  
-    if (this.isEditMode && this.selectedRoomId) {
-      // Update room
-      this.roomService.updateRoom(this.selectedRoomId, roomData).subscribe({
+
+    const patientData: any = this.patientForm.value;
+
+    if (this.isEditMode && this.selectedPatientId) {
+      // Update patient
+      this.patientService.updatePatients(this.selectedPatientId, patientData).subscribe({
         next: () => {
           Swal.fire({
             title: 'Updated!',
-            text: 'Room updated successfully.',
+            text: 'Patient details updated successfully.',
             icon: 'success',
             confirmButtonText: 'OK'
           }).then(() => {
-            // Navigate back to room list after successful update
-            this.router.navigate(['/rooms/list']);
+            this.router.navigate(['/patients/list']);
           });
         },
         error: (err) => {
           Swal.fire({
             title: 'Error!',
-            text: 'There was an issue updating the room.',
+            text: 'There was an issue updating the patient.',
             icon: 'error',
             confirmButtonText: 'OK'
           });
-          console.error('Error updating room', err);
+          console.error('Error updating patient', err);
         },
       });
     } else {
-      // Create new room
-      this.roomService.addRoom(roomData).subscribe({
+      // Create new patient
+      this.patientService.addPatients(patientData).subscribe({
         next: () => {
           Swal.fire({
             title: 'Created!',
-            text: 'Room created successfully.',
+            text: 'Patient details created successfully.',
             icon: 'success',
             confirmButtonText: 'OK'
           }).then(() => {
-            // Navigate back to room list after successful creation
-            this.router.navigate(['/rooms/list']);
+            this.router.navigate(['/patients/list']);
           });
         },
         error: (err) => {
           Swal.fire({
             title: 'Error!',
-            text: 'There was an issue creating the room.',
+            text: 'There was an issue creating the patient.',
             icon: 'error',
             confirmButtonText: 'OK'
           });
-          console.error('Error creating room', err);
+          console.error('Error creating patient', err);
         },
       });
     }
   }
 
-  // Reset form to initial state
+  // Reset form
   resetForm() {
-    this.roomForm.reset();
+    this.patientForm.reset();
     this.isEditMode = false;
-    this.selectedRoomId = null;
+    this.selectedPatientId = null;
   }
 }
