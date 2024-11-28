@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./medicine-dialog.component.scss']
 })
 export class MedicineDialogComponent implements OnInit {
-  medicines: { medicineId: number, quantity: number }[] = []; // Array for medicines
+  medicines: { medicineId: number, quantity: number , purchaseDate : string}[] = []; // Array for medicines
   medicineList: any[] = []; // Array to hold the medicine list fetched from the service
   patientId !: number;
   constructor(
@@ -43,7 +43,8 @@ export class MedicineDialogComponent implements OnInit {
     const medicinesToAssign = this.medicines.map(medicine => ({
       patient: { id: patientId },
       medicine: { id: medicine.medicineId },
-      quantity: medicine.quantity
+      quantity: medicine.quantity,
+      purchaseDate : medicine.purchaseDate
     }));
 
     // Call the service method to assign medicines
@@ -77,7 +78,7 @@ export class MedicineDialogComponent implements OnInit {
 
   // Add a new medicine entry
   addMedicine(): void {
-    this.medicines.push({ medicineId: 0, quantity: 1 });
+    this.medicines.push({ medicineId: 0, quantity: 1 , purchaseDate : '2024-11-01'});
   }
 
   // Remove a medicine entry

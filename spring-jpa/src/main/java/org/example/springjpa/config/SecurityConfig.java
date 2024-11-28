@@ -57,8 +57,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .csrf().disable() // Disable CSRF for simplicity; enable in production
                 .authorizeRequests()
+
+                .antMatchers("/actuator/**").permitAll() // Allow unrestricted access to these endpoints
+
                 .antMatchers("/api/users/**").permitAll() // Allow unrestricted access to these endpoints
                 .antMatchers("/api/rooms/all", "/api/rooms/**").permitAll()
+                .antMatchers("/api/medicines", "/api/medicines/**").permitAll()
                 .antMatchers("/api/patients", "/api/patients/**").permitAll()
                 .antMatchers("/api/admissions", "/api/admissions/**").permitAll()
 

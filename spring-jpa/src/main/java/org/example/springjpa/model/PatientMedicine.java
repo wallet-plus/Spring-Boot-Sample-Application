@@ -1,6 +1,7 @@
 package org.example.springjpa.model;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 public class PatientMedicine {
@@ -18,6 +19,9 @@ public class PatientMedicine {
     private Medicine medicine;
 
     private Integer quantity;
+
+    @Column(name = "purchase_date", nullable = false)
+    private LocalDate purchaseDate;
 
     // Getters and Setters
     public Long getId() {
@@ -50,5 +54,13 @@ public class PatientMedicine {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public LocalDate getPurchaseDate() {
+        return purchaseDate;
+    }
+
+    public void setPurchaseDate(LocalDate purchaseDate) {
+        this.purchaseDate = purchaseDate;
     }
 }
