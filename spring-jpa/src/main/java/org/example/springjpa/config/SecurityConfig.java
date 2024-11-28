@@ -60,7 +60,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/users/**").permitAll() // Allow unrestricted access to these endpoints
                 .antMatchers("/api/rooms/all", "/api/rooms/**").permitAll()
                 .antMatchers("/api/patients", "/api/patients/**").permitAll()
-                .antMatchers("/api/medicines", "/api/medicines/**").permitAll()
+                .antMatchers("/api/admissions", "/api/admissions/**").permitAll()
+
+
 
                 .anyRequest().authenticated()
                 .and()

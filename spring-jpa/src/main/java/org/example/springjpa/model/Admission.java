@@ -14,9 +14,6 @@ public class Admission {
     @JoinColumn(name = "patient_id", nullable = false)
     private User patient; // Links to the User table for patient details
 
-    @ManyToOne
-    @JoinColumn(name = "room_id", nullable = false)
-    private Room room; // Links to the existing Room table
 
     @Temporal(TemporalType.DATE)
     private Date admissionDate;
@@ -46,13 +43,6 @@ public class Admission {
         this.patient = patient;
     }
 
-    public Room getRoom() {
-        return room;
-    }
-
-    public void setRoom(Room room) {
-        this.room = room;
-    }
 
     public Date getAdmissionDate() {
         return admissionDate;
