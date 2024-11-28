@@ -3,6 +3,9 @@ import { PatientService } from 'src/app/services/patient.service';
 import Swal from 'sweetalert2';
 import { MatDialog } from '@angular/material/dialog';
 import { AdmissionService } from 'src/app/services/admission.service';
+import { MedicineDialogComponent } from 'src/app/patient/dialogs/medicine-dialog/medicine-dialog.component';
+import { RoomDialogComponent } from 'src/app/patient/dialogs/room-dialog/room-dialog.component';
+import { InvoiceDialogComponent } from 'src/app/patient/dialogs/invoice-dialog/invoice-dialog.component';
 
 @Component({
   selector: 'app-admission-list',
@@ -11,12 +14,14 @@ import { AdmissionService } from 'src/app/services/admission.service';
 })
 export class AdmissionListComponent {
   admissionsList: any[] = []; 
-
-  constructor(private admissionService: AdmissionService, private dialog: MatDialog) {}
+  constructor(
+    private admissionService: AdmissionService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.getaAdmissionsList();
   }
+
+
 
   getaAdmissionsList(): void {
     this.admissionService.getaAdmissionList().subscribe(
@@ -61,18 +66,46 @@ export class AdmissionListComponent {
   //   });
   // }
 
-  // assignMedicine( patient: any) {
-  //   const dialogRef = this.dialog.open(MedicineDialogComponent, {
-  //     width: '70%',    // Set the width to 70% of the screen width
-  //     height: '70%',   // Set the height to 80% of the screen height
-  //     data: { patient: patient }  // Optional data you want to pass to dialog
-  //   });
+  assignMedicine( patient: any) {
+    const dialogRef = this.dialog.open(MedicineDialogComponent, {
+      width: '70%',    // Set the width to 70% of the screen width
+      height: '70%',   // Set the height to 80% of the screen height
+      data: { patient: patient }  // Optional data you want to pass to dialog
+    });
   
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     console.log('Dialog closed with result: ', result);
-  //     // You can process the result from the dialog here if needed
-  //   });
-  // }
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('Dialog closed with result: ', result);
+      // You can process the result from the dialog here if needed
+    });
+  }
+
+
+  assignRoom( patient: any) {
+    const dialogRef = this.dialog.open(RoomDialogComponent, {
+      width: '70%',    // Set the width to 70% of the screen width
+      height: '70%',   // Set the height to 80% of the screen height
+      data: { patient: patient }  // Optional data you want to pass to dialog
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('Dialog closed with result: ', result);
+      // You can process the result from the dialog here if needed
+    });
+  }
+
+  invoice( patient: any) {
+    const dialogRef = this.dialog.open(InvoiceDialogComponent, {
+      width: '70%',    // Set the width to 70% of the screen width
+      height: '70%',   // Set the height to 80% of the screen height
+      data: { patient: patient }  // Optional data you want to pass to dialog
+    });
+  
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('Dialog closed with result: ', result);
+      // You can process the result from the dialog here if needed
+    });
+  }
+  
   
   
   

@@ -10,15 +10,18 @@
       <!-- Form -->
       <form [formGroup]="admissionForm" (ngSubmit)="saveOrUpdateAdmission()">
         <div class="row mb-3">
-          <label class="col-sm-2 col-form-label" for="patientId">Patient ID</label>
+          <label class="col-sm-2 col-form-label" for="patientList">Patient List</label>
           <div class="col-sm-10">
-            <input
-              type="number"
+            <select
               class="form-control"
-              id="patientId"
+              id="patientList"
               formControlName="patientId"
-              placeholder="Enter patient ID"
-            />
+            >
+              <option value=""  >Select a patient</option>
+              <option *ngFor="let patient of patientList" [value]="patient.id">
+                {{ patient.firstName }} {{ patient.lastName }} {{patient.id}}
+              </option>
+            </select>
           </div>
         </div>
         <div class="row mb-3">

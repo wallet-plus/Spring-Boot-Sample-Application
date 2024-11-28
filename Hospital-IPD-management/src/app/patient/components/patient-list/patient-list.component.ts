@@ -15,10 +15,10 @@ export class PatientListComponent {
   constructor(private patientService: PatientService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
-    this.getStaff();
+    this.getPatientsList();
   }
 
-  getStaff(): void {
+  getPatientsList(): void {
     this.patientService.getPatientsList().subscribe(
       (data) => {
         this.patientList = data; // Assign the employee data
@@ -61,18 +61,7 @@ export class PatientListComponent {
     });
   }
 
-  assignMedicine( patient: any) {
-    const dialogRef = this.dialog.open(MedicineDialogComponent, {
-      width: '70%',    // Set the width to 70% of the screen width
-      height: '70%',   // Set the height to 80% of the screen height
-      data: { patient: patient }  // Optional data you want to pass to dialog
-    });
-  
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('Dialog closed with result: ', result);
-      // You can process the result from the dialog here if needed
-    });
-  }
+
   
   
   

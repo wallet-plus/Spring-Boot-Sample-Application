@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AdmissionService } from 'src/app/services/admission.service';
+import { PatientService } from 'src/app/services/patient.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -13,16 +14,19 @@ export class AdmissionDetailsComponent {
   admissionForm!: FormGroup;
   isEditMode = false;
   selectedAdmissionId: number | null = null;
+  patientList  :any[] = []; 
 
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private admissionService: AdmissionService, // Replace with your service
-    private router: Router
+    private router: Router,
+    private patientService: PatientService,
   ) {}
 
   ngOnInit(): void {
     this.initForm();
+    this.getPatientsList();
 
     const admissionId = this.route.snapshot.paramMap.get('id');
     if (admissionId) {
@@ -32,6 +36,18 @@ export class AdmissionDetailsComponent {
     }
   }
 
+  getPatientsList(): void {
+    this.patientService.getPatientsList().subscribe(
+      (data) => {
+        this.patientList = data; // Assign the employee data
+      },
+      (error) => {
+        console.error('Error fetching employee list:', error);
+      }
+    );
+  }
+
+  
   // Initialize the form
   initForm() {
     this.admissionForm = this.fb.group({
