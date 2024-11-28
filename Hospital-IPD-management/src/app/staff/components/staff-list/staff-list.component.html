@@ -12,6 +12,39 @@
       </small>
     </div>
 
+
+    <div class="card-header">
+      <form [formGroup]="searchForm" (ngSubmit)="onSearch()">
+        <div class="d-flex justify-content-between align-items-center row pt-4 gap-6 gap-md-0 g-md-6">
+          <!-- First Name Input -->
+          <div class="col-md-4">
+            <input 
+              formControlName="firstName" 
+              type="text" 
+              class="form-control text-capitalize" 
+              placeholder="Search by First Name"
+            />
+          </div>
+    
+          <!-- Mobile Number Input -->
+          <div class="col-md-4">
+            <input 
+              formControlName="mobile" 
+              type="text" 
+              class="form-control" 
+              placeholder="Search by Mobile Number"
+            />
+          </div>
+    
+          <!-- Search Button -->
+          <div class="col-md-4">
+            <button type="submit" class="btn btn-primary">Search</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    
+
     <div class="table-responsive text-nowrap">
       <table class="table">
         <thead class="table-light">

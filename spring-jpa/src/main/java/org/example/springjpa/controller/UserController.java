@@ -15,10 +15,42 @@ public class UserController {
     @Autowired
     private UserService employeeService;
 
-    @GetMapping
-    public List<User> getAllEmployees() {
-        return employeeService.getAllEmployees();
+    // Endpoint to get employees with optional search parameters
+    @GetMapping("/employees")
+    public List<User> getEmployees(
+            @RequestParam(required = false) String firstName,
+            @RequestParam(required = false) String mobile) {
+
+        // If both firstName and mobile are provided, search both
+        if (firstName != null && mobile != null) {
+            // Ensure we only take the first two characters for search
+            firstName = firstName.length() >= 2 ? firstName.substring(0, 2) : firstName;
+            mobile = mobile.length() >= 2 ? mobile.substring(0, 2) : mobile;
+            return employeeService.searchEmployeesByFirstNameAndMobile(firstName, mobile);
+        }
+
+        // If only firstName is provided, search by first name
+        else if (firstName != null) {
+            firstName = firstName.length() >= 2 ? firstName.substring(0, 2) : firstName;
+            return employeeService.searchEmployeesByFirstName(firstName);
+        }
+
+        // If only mobile is provided, search by mobile
+        else if (mobile != null) {
+            mobile = mobile.length() >= 2 ? mobile.substring(0, 2) : mobile;
+            return employeeService.searchEmployeesByMobile(mobile);
+        }
+
+        // If neither parameter is provided, return all employees
+        else {
+            return employeeService.getAllEmployees();
+        }
     }
+
+    //    @GetMapping
+    //    public List<User> getAllEmployees() {
+    //        return employeeService.getAllEmployees();
+    //    }
 
     @GetMapping("/{id}")
     public Optional<User> getEmployeeById(@PathVariable Long id) {

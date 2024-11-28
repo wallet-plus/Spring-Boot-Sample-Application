@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { catchError, Observable, throwError } from 'rxjs';
 import { environment } from 'src/environment/environment';
 
 @Injectable({
@@ -11,10 +11,29 @@ export class StaffService {
 
   constructor(private http: HttpClient) {}
 
-  // Get the list of all staff
-  getStaffList(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}users`);
+  getStaffList(firstName: string = '', mobile: string = ''): Observable<any[]> {
+    let params = new HttpParams();
+  
+    if (firstName) {
+      params = params.set('firstName', firstName);
+    }
+    if (mobile) {
+      params = params.set('mobile', mobile);
+    }
+  
+    return this.http.get<any[]>(`${this.baseUrl}users/employees`, { params }).pipe(
+      catchError(error => {
+        console.error('Error fetching staff list', error);
+        return throwError(error); // Return the error to the component
+      })
+    );
   }
+  
+
+  // // Get the list of all staff
+  // getStaffList(): Observable<any[]> {
+  //   return this.http.get<any[]>(`${this.baseUrl}users`);
+  // }
 
   // Get details of a single staff member by ID
   getStaffById(id: number): Observable<any> {
