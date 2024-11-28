@@ -20,7 +20,6 @@ export class PatientMedicinesComponent {
   ngOnInit(): void {
 
     const patientId = this.route.snapshot.paramMap.get('id');
-debugger;
     if (patientId) {
       this.selectedPatientId = +patientId;
       this.getPatientMedicines();

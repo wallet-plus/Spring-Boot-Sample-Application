@@ -48,8 +48,6 @@ export class AdmissionDetailsComponent {
     if (this.selectedAdmissionId) {
       this.admissionService.getAdmissionById(this.selectedAdmissionId).subscribe({
         next: (admissionData) => {
-          debugger;
-          // this.admissionForm.patchValue(admissionData);
           this.admissionForm.get('patientId')?.setValue(admissionData.patient?.id);
           this.admissionForm.get('admissionDate')?.setValue(admissionData.admissionDate);
           this.admissionForm.get('dischargeDate')?.setValue(admissionData.dischargeDate);
@@ -79,7 +77,7 @@ export class AdmissionDetailsComponent {
 
     if (this.isEditMode && this.selectedAdmissionId) {
       // Update admission
-      this.admissionService.discharge(this.selectedAdmissionId, admissionData).subscribe({
+      this.admissionService.discharge(this.admissionForm.get('patientId')?.value, admissionData).subscribe({
         next: () => {
           Swal.fire({
             title: 'Updated!',
