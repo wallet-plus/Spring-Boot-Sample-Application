@@ -1,11 +1,13 @@
 package org.example.springjpa.service;
 
-import org.example.springjpa.model.PatientRoom;
+import org.example.springjpa.model.AdmissionRoom;
 import org.example.springjpa.model.Room;
-import org.example.springjpa.repository.PatientRoomRepository;
+import org.example.springjpa.repository.AdmissionRoomRepository;
+import org.example.springjpa.repository.AdmissionRepository;
 import org.example.springjpa.repository.RoomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.example.springjpa.model.Admission;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -17,7 +19,10 @@ public class RoomService {
     private RoomRepository roomRepository;
 
     @Autowired
-    private PatientRoomRepository patientRoomRepository;
+    private AdmissionRoomRepository admissionRoomRepository;
+
+    @Autowired
+    private AdmissionRepository admissionRepository;
 
     public Room addRoom(Room room) {
         return roomRepository.save(room);
@@ -43,19 +48,20 @@ public class RoomService {
         return roomRepository.findById(id).orElseThrow(() -> new RuntimeException("Room not found"));
     }
 
-    public PatientRoom movePatientToNewRoom(Long roomId, Long patientId, LocalDate startDate) {
-        // Find the patient room with no start date (i.e., not yet moved)
-        PatientRoom patientRoom = patientRoomRepository.findByPatientIdAndStartDateIsNull(patientId)
-                .orElseThrow(() -> new RuntimeException("Patient not found or already moved"));
+    // Method to move patient to new room
+    public AdmissionRoom movePatientToNewRoom(Long roomId, Long admissionId, AdmissionRoom admissionRoom) {
+        // Fetch the admission and room
+        Admission admission = admissionRepository.findById(admissionId)
+                .orElseThrow(() -> new RuntimeException("Admission not found"));
 
-        // Update the room and start date
         Room room = roomRepository.findById(roomId)
                 .orElseThrow(() -> new RuntimeException("Room not found"));
 
-        patientRoom.setStartDate(startDate);
-        patientRoom.setRoom(room);  // Set the Room object, not the roomId
+        // Set the new room and admission in the AdmissionRoom entity
+        admissionRoom.setAdmission(admission);
+        admissionRoom.setRoom(room);
 
-        // Save the updated patient room
-        return patientRoomRepository.save(patientRoom);
+        // Save the updated AdmissionRoom
+        return admissionRoomRepository.save(admissionRoom);
     }
 }

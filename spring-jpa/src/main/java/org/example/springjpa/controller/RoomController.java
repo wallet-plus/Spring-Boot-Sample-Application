@@ -1,11 +1,10 @@
 package org.example.springjpa.controller;
 
 import org.example.springjpa.model.Room;
-import org.example.springjpa.model.PatientRoom;
+import org.example.springjpa.model.AdmissionRoom;
 import org.example.springjpa.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -55,10 +54,6 @@ public class RoomController {
     }
 
 
-    // Update the method to include the current date as startDate
-    @PutMapping("/{roomId}/move/{patientId}")
-    public PatientRoom movePatientToNewRoom(@PathVariable Long roomId, @PathVariable Long patientId) {
-        // Pass the current date (startDate)
-        return roomService.movePatientToNewRoom(roomId, patientId, LocalDate.now());
-    }
+
+
 }
