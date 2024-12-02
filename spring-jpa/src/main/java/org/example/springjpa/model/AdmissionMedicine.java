@@ -1,18 +1,18 @@
 package org.example.springjpa.model;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
-public class PatientMedicine {
+public class AdmissionMedicine {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "patient_id", nullable = false)
-    private User patient;
+    @JoinColumn(name = "admission_id", nullable = false)
+    private Admission admission;
 
     @ManyToOne
     @JoinColumn(name = "medicine_id", nullable = false)
@@ -20,8 +20,13 @@ public class PatientMedicine {
 
     private Integer quantity;
 
-    @Column(name = "purchase_date", nullable = false)
-    private LocalDate purchaseDate;
+    @Column(name = "purchase_date", nullable = false, updatable = false)
+    private LocalDateTime purchaseDate;
+
+    @PrePersist
+    protected void onCreate() {
+        this.purchaseDate = LocalDateTime.now();
+    }
 
     // Getters and Setters
     public Long getId() {
@@ -32,12 +37,12 @@ public class PatientMedicine {
         this.id = id;
     }
 
-    public User getPatient() {
-        return patient;
+    public Admission getAdmission() {
+        return admission;
     }
 
-    public void setPatient(User patient) {
-        this.patient = patient;
+    public void setAdmission(Admission admission) {
+        this.admission = admission;
     }
 
     public Medicine getMedicine() {
@@ -56,11 +61,11 @@ public class PatientMedicine {
         this.quantity = quantity;
     }
 
-    public LocalDate getPurchaseDate() {
+    public LocalDateTime getPurchaseDate() {
         return purchaseDate;
     }
 
-    public void setPurchaseDate(LocalDate purchaseDate) {
+    public void setPurchaseDate(LocalDateTime purchaseDate) {
         this.purchaseDate = purchaseDate;
     }
 }

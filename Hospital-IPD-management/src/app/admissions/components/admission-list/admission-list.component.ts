@@ -66,11 +66,11 @@ export class AdmissionListComponent {
   //   });
   // }
 
-  assignMedicine( patient: any) {
+  assignMedicine( admission: any) {
     const dialogRef = this.dialog.open(MedicineDialogComponent, {
       width: '70%',    // Set the width to 70% of the screen width
       height: '70%',   // Set the height to 80% of the screen height
-      data: { patient: patient }  // Optional data you want to pass to dialog
+      data: { admission: admission }  // Optional data you want to pass to dialog
     });
   
     dialogRef.afterClosed().subscribe(result => {
@@ -80,11 +80,11 @@ export class AdmissionListComponent {
   }
 
 
-  assignRoom( patient: any) {
+  assignRoom( admission: any) {
     const dialogRef = this.dialog.open(RoomDialogComponent, {
       width: '70%',    // Set the width to 70% of the screen width
       height: '70%',   // Set the height to 80% of the screen height
-      data: { patient: patient }  // Optional data you want to pass to dialog
+      data: { admission: admission }  // Optional data you want to pass to dialog
     });
   
     dialogRef.afterClosed().subscribe(result => {
@@ -93,11 +93,11 @@ export class AdmissionListComponent {
     });
   }
 
-  invoice( patient: any) {
+  invoice( admission: any) {
     const dialogRef = this.dialog.open(InvoiceDialogComponent, {
       width: '70%',    // Set the width to 70% of the screen width
       height: '70%',   // Set the height to 80% of the screen height
-      data: { patient: patient }  // Optional data you want to pass to dialog
+      data: { admission: admission }  // Optional data you want to pass to dialog
     });
   
     dialogRef.afterClosed().subscribe(result => {

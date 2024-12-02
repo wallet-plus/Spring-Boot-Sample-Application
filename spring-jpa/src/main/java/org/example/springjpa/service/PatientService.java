@@ -1,9 +1,9 @@
 package org.example.springjpa.service;
 
 import org.example.springjpa.model.Patient;
-import org.example.springjpa.model.PatientMedicine;
+import org.example.springjpa.model.AdmissionMedicine;
 import org.example.springjpa.repository.PatientRepository;
-import org.example.springjpa.repository.PatientMedicineRepository;
+import org.example.springjpa.repository.AdmissionMedicineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,7 @@ public class PatientService {
     private PatientRepository patientRepository;
 
     @Autowired
-    private PatientMedicineRepository patientMedicineRepository;
+    private AdmissionMedicineRepository admissionMedicineRepository;
 
     // Get all patients
     public List<Patient> getAllPatients() {
@@ -41,12 +41,12 @@ public class PatientService {
 
 
     // Assign a medicine to a patient
-    public PatientMedicine assignMedicineToPatient(PatientMedicine patientMedicine) {
-        return patientMedicineRepository.save(patientMedicine);
+    public AdmissionMedicine assignMedicineToPatient(AdmissionMedicine patientMedicine) {
+        return admissionMedicineRepository.save(patientMedicine);
+    }
+    // Get all medicines assigned to a specific admission
+    public List<AdmissionMedicine> getMedicinesByAdmission(Long admissionId) {
+        return admissionMedicineRepository.findByAdmissionId(admissionId);
     }
 
-    // Get all medicines assigned to a specific patient
-    public List<PatientMedicine> getMedicinesByPatient(Long patientId) {
-        return patientMedicineRepository.findByPatientId(patientId);
-    }
 }

@@ -37,20 +37,17 @@ export class MedicineDialogComponent implements OnInit {
     );
   }
 
-  // Handle form submission
   onSubmit(): void {
-    const patientId = this.data.patient.id; // Assume the patient ID is passed as part of the dialog data
+    const admissionId = this.data.admission.id; // Assume the admission ID is passed as part of the dialog data
     const medicinesToAssign = this.medicines.map(medicine => ({
-      patient: { id: patientId },
+      admission: { id: admissionId },
       medicine: { id: medicine.medicineId },
-      quantity: medicine.quantity,
-      purchaseDate : medicine.purchaseDate
+      quantity: medicine.quantity
     }));
-
+  
     // Call the service method to assign medicines
     this.medicineService.assignMedicines(medicinesToAssign[0]).subscribe(
       (response) => {
-        
         // Success: Show success notification
         Swal.fire({
           title: 'Success!',
@@ -63,7 +60,6 @@ export class MedicineDialogComponent implements OnInit {
         });
       },
       (error) => {
-
         // Error: Show error notification and do not close the dialog
         Swal.fire({
           title: 'Error!',
@@ -74,7 +70,7 @@ export class MedicineDialogComponent implements OnInit {
       }
     );
   }
-
+  
 
   // Add a new medicine entry
   addMedicine(): void {

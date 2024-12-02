@@ -1,7 +1,7 @@
 package org.example.springjpa.controller;
 
 import org.example.springjpa.model.Medicine;
-import org.example.springjpa.model.PatientMedicine;
+import org.example.springjpa.model.AdmissionMedicine;
 import org.example.springjpa.service.MedicineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -55,15 +55,16 @@ public class MedicineController {
         medicineService.deleteMedicine(id);
     }
 
-    // Assign medicine to a patient
+    // Assign medicine to an admission
     @PostMapping("/assign")
-    public PatientMedicine assignMedicine(@RequestBody PatientMedicine patientMedicine) {
-        return medicineService.assignMedicine(patientMedicine);
+    public AdmissionMedicine assignMedicine(@RequestBody AdmissionMedicine admissionMedicine) {
+        return medicineService.assignMedicineToAdmission(admissionMedicine);
     }
 
-    // Get all medicines assigned to a patient
-    @GetMapping("/patient/{patientId}")
-    public List<PatientMedicine> getMedicinesByPatient(@PathVariable Long patientId) {
-        return medicineService.getMedicinesByPatient(patientId);
+    // Get all medicines assigned to a specific admission
+    @GetMapping("/admission/{admissionId}")
+    public List<AdmissionMedicine> getMedicinesByAdmission(@PathVariable Long admissionId) {
+        return medicineService.getMedicinesByAdmission(admissionId);
     }
+
 }

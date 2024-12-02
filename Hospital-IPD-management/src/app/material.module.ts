@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MatDialogModule } from '@angular/material/dialog';
 import {MatTabsModule} from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card'; 
+import { MatTableModule } from '@angular/material/table'; // Import MatTableModule
 
 
 @NgModule({
@@ -11,11 +12,13 @@ import { MatCardModule } from '@angular/material/card';
     CommonModule,
     MatDialogModule,
     MatTabsModule,
-    MatCardModule
+    MatCardModule,
+    MatTableModule
   ],
   exports:[
     MatTabsModule,
-    MatCardModule
+    MatCardModule,
+    MatTableModule
   ]
 })
 export class MaterialModule { }
