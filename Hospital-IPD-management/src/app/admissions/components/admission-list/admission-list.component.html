@@ -36,7 +36,6 @@
               <td>{{admission.dischargeDate}}</td>
               <td>{{admission.status}}</td>
               <td>
-                <button *ngIf="admission.status !='Discharged'" type="button" class="btn btn-primary">Discharge</button>
                 <!-- *ngIf="admission.status =='Discharged'"  -->
                 <button type="button" class="btn btn-primary" (click)="invoice(admission)">Invoice</button>
                 <button *ngIf="admission.status !='Discharged'" type="button" class="btn btn-primary" (click)="assignMedicine(admission)">Add Medicine</button>
