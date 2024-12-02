@@ -37,9 +37,10 @@
               <td>{{admission.status}}</td>
               <td>
                 <button *ngIf="admission.status !='Discharged'" type="button" class="btn btn-primary">Discharge</button>
-                <button *ngIf="admission.status =='Discharged'" type="button" class="btn btn-primary" (click)="invoice(admission.patient)">Invoice</button>
-                <button *ngIf="admission.status !='Discharged'" type="button" class="btn btn-primary" (click)="assignMedicine(admission.patient)">Add Medicine</button>
-                <button *ngIf="admission.status !='Discharged'" type="button" class="btn btn-primary" (click)="assignRoom(admission.patient)">Add Room</button>
+                <!-- *ngIf="admission.status =='Discharged'"  -->
+                <button type="button" class="btn btn-primary" (click)="invoice(admission)">Invoice</button>
+                <button *ngIf="admission.status !='Discharged'" type="button" class="btn btn-primary" (click)="assignMedicine(admission)">Add Medicine</button>
+                <button *ngIf="admission.status !='Discharged'" type="button" class="btn btn-primary" (click)="assignRoom(admission)">Add Room</button>
 
               </td>
 
