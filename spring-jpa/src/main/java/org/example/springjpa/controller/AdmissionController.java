@@ -2,6 +2,7 @@ package org.example.springjpa.controller;
 
 import org.example.springjpa.model.Admission;
 import org.example.springjpa.model.AdmissionRoom;
+import org.example.springjpa.repository.AdmissionRoomRepository;
 import org.example.springjpa.service.AdmissionService;
 import org.example.springjpa.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,10 @@ public class AdmissionController {
 
     @Autowired
     private AdmissionService admissionService;
+
+    @Autowired
+    private AdmissionRoomRepository admissionRoomRepository;
+
 
     @Autowired
     private RoomService roomService;
@@ -55,6 +60,12 @@ public class AdmissionController {
     public AdmissionRoom moveAdmissionToNewRoom(@PathVariable Long roomId, @PathVariable Long admissionId, @RequestBody AdmissionRoom admissionRoom) {
         return roomService.movePatientToNewRoom(roomId, admissionId, admissionRoom);
     }
+
+    @GetMapping("/{admissionId}/rooms")
+    public List<AdmissionRoom> getAdmissionRooms(@PathVariable Long admissionId) {
+        return admissionRoomRepository.findByAdmissionId(admissionId);  // Return list of rooms
+    }
+
 
 }
 
