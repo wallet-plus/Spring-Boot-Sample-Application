@@ -50,5 +50,11 @@ export class AdmissionService {
   assignRoom(admissionId: any, roomId: any, request : any): Observable<any> {
     return this.http.put<any>(`${this.baseUrl}admissions/${roomId}/move/${admissionId}`, request);
   }
-  
+
+  // Method to assign medicines to a patient
+  getRoomsByAdmission(id: any): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}admissions/${id}/rooms`);
+  }
+
+ 
 }
