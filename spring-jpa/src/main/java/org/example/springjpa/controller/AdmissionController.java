@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 @RestController
 @RequestMapping("/api/admissions")
 public class AdmissionController {
@@ -20,7 +19,6 @@ public class AdmissionController {
 
     @Autowired
     private AdmissionRoomRepository admissionRoomRepository;
-
 
     @Autowired
     private RoomService roomService;
@@ -46,26 +44,26 @@ public class AdmissionController {
         return ResponseEntity.ok(admission);
     }
 
-    // Discharge a patient
-    @PutMapping("/{id}/discharge")
-    public ResponseEntity<Admission> dischargePatient(
+    // Update admission (including status and other fields)
+    @PutMapping("/{id}")
+    public ResponseEntity<Admission> updateAdmission(
             @PathVariable Long id,
-            @RequestBody String dischargeSummary) {
-        Admission dischargedAdmission = admissionService.dischargePatient(id, dischargeSummary);
-        return ResponseEntity.ok(dischargedAdmission);
+            @RequestBody Admission updatedAdmission) {
+        Admission savedAdmission = admissionService.updateAdmission(id, updatedAdmission);
+        return ResponseEntity.ok(savedAdmission);
     }
 
-
+    // Move admission to a new room
     @PutMapping("/{roomId}/move/{admissionId}")
     public AdmissionRoom moveAdmissionToNewRoom(@PathVariable Long roomId, @PathVariable Long admissionId, @RequestBody AdmissionRoom admissionRoom) {
         return roomService.movePatientToNewRoom(roomId, admissionId, admissionRoom);
     }
 
+    // Get rooms associated with an admission
     @GetMapping("/{admissionId}/rooms")
     public List<AdmissionRoom> getAdmissionRooms(@PathVariable Long admissionId) {
-        return admissionRoomRepository.findByAdmissionId(admissionId);  // Return list of rooms
+        return admissionRoomRepository.findByAdmissionId(admissionId);
     }
-
-
 }
+
 

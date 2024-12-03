@@ -5,7 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="58ce6375-464b-4bd5-be5c-a09d09604973" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/spring-jpa/src/test/java/org/example/springjpa/SpringJpaApplicationTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hospital-IPD-management/src/app/admissions/components/admission-details/admission-details.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/Hospital-IPD-management/src/app/admissions/components/admission-details/admission-details.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Hospital-IPD-management/src/app/admissions/components/admission-details/admission-details.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/Hospital-IPD-management/src/app/admissions/components/admission-details/admission-details.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-jpa/src/main/java/org/example/springjpa/controller/AdmissionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring-jpa/src/main/java/org/example/springjpa/controller/AdmissionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spring-jpa/src/main/java/org/example/springjpa/service/AdmissionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/spring-jpa/src/main/java/org/example/springjpa/service/AdmissionService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,14 +27,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/java/Spring-Boot-Sample-Application/spring-jpa"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/java/Spring-Boot-Sample-Application/spring-jpa&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

@@ -33,7 +33,7 @@ export class AdmissionService {
 
   // Delete a room by ID
   discharge(id: number, discharge : any): Observable<any> {
-    return this.http.put<any>(`${this.baseUrl}admissions/${id}/discharge`, discharge); // Updated endpoint for deleting a room
+    return this.http.put<any>(`${this.baseUrl}admissions/${id}`, discharge); // Updated endpoint for deleting a room
   }
 
   // Method to assign medicines to a patient

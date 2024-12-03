@@ -11,7 +11,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-
 @Service
 public class AdmissionService {
 
@@ -19,12 +18,11 @@ public class AdmissionService {
     private AdmissionRepository admissionRepository;
 
     @Autowired
-    private AdmissionRoomRepository admissionRoomRepository;  // Inject the repository
+    private AdmissionRoomRepository admissionRoomRepository;
 
     // Create new admission
     public Admission createAdmission(Admission admission) {
-        admission.setStatus("Admitted");
-        admission.setAdmissionDate(new Date());
+        // No default status is set; all fields, including status, should come from the API request
         return admissionRepository.save(admission);
     }
 
@@ -39,19 +37,18 @@ public class AdmissionService {
                 .orElseThrow(() -> new RuntimeException("Admission not found"));
     }
 
-    // Discharge a patient
-    public Admission dischargePatient(Long id, String dischargeSummary) {
+    // Update admission details, including status
+    public Admission updateAdmission(Long id, Admission updatedAdmission) {
         Admission admission = getAdmissionById(id);
-        admission.setStatus("Discharged");
-        admission.setDischargeDate(new Date());
-        admission.setDischargeSummary(dischargeSummary);
+        admission.setStatus(updatedAdmission.getStatus());
+        admission.setDischargeSummary(updatedAdmission.getDischargeSummary());
+        admission.setAdmissionDate(updatedAdmission.getAdmissionDate());
+        admission.setDischargeDate(updatedAdmission.getDischargeDate());
         return admissionRepository.save(admission);
     }
 
     // Custom method to get rooms for admissionId
     public List<AdmissionRoom> getAdmissionRooms(Long admissionId) {
-        List<AdmissionRoom> rooms = admissionRoomRepository.findByAdmissionId(admissionId);  // Directly fetch the list
-        return rooms.isEmpty() ? List.of() : rooms;  // Return the list, or an empty list if no rooms are found
+        return admissionRoomRepository.findByAdmissionId(admissionId);
     }
-
 }
