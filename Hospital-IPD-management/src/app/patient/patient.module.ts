@@ -6,7 +6,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material.module';
 import { MedicineDialogComponent } from './dialogs/medicine-dialog/medicine-dialog.component';
-import { PatientMedicinesComponent } from './components/patient-medicines/patient-medicines.component';
 import { PatientComponent } from './components/patient/patient.component';
 import { RoomDialogComponent } from './dialogs/room-dialog/room-dialog.component';
 import { InvoiceDialogComponent } from './dialogs/invoice-dialog/invoice-dialog.component';
@@ -44,7 +43,6 @@ const routes: Routes = [
     PatientListComponent,
     PatientDetailsComponent,
     MedicineDialogComponent,
-    PatientMedicinesComponent,
     PatientComponent,
     RoomDialogComponent,
     InvoiceDialogComponent

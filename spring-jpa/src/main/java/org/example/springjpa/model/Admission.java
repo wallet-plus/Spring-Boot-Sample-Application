@@ -12,8 +12,7 @@ public class Admission {
 
     @ManyToOne
     @JoinColumn(name = "patient_id", nullable = false)
-    private User patient; // Links to the User table for patient details
-
+    private Patient patient; // Links to the Patient table for patient details
 
     @Temporal(TemporalType.DATE)
     private Date admissionDate;
@@ -35,14 +34,13 @@ public class Admission {
         this.id = id;
     }
 
-    public User getPatient() {
+    public Patient getPatient() {
         return patient;
     }
 
-    public void setPatient(User patient) {
+    public void setPatient(Patient patient) {
         this.patient = patient;
     }
-
 
     public Date getAdmissionDate() {
         return admissionDate;
@@ -76,4 +74,3 @@ public class Admission {
         this.dischargeSummary = dischargeSummary;
     }
 }
-
